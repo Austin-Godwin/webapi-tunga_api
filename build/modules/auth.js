@@ -44,9 +44,10 @@ var Auth = /** @class */ (function () {
         var user = this.users.find(function (user) { return user.email.toLowerCase() === email.toLowerCase(); });
         if (!user)
             throw "No matching user found";
-        //if(isVerified !== user.isVerified) throw `isVerfied can't be determined`;
+        // if(isVerified !== user.isVerified) throw `isVerfied can't be determined`;
         if (isVerified !== true && isVerified !== false)
             throw "The Verification is neither true nor false";
+        user.isVerified = true;
         return user.toJson;
     };
     return Auth;
