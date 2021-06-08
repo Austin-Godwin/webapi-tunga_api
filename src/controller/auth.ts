@@ -54,7 +54,7 @@ class AuthController{
 
         const result = auth.setifVerified(email as string, isVerified);
 
-        res.send({mesage:"Account successfully update", data: result});
+        res.send({mesage:"Account successfully updated", data: result});
     }
 
 
