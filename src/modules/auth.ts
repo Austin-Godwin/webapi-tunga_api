@@ -33,13 +33,41 @@ export default class Auth {
 
         this.users.push(userReg);
 
-        return {
-            userId: userReg.name,
-            email: userReg.email,
-            password: userReg.pwd
-        }
+        return userReg.toJson;
 
 
+    }
+
+    listOfUsers() {
+        // const listOfUsers = [];
+
+        // for (let user of this.users) {
+        //     listOfUsers.push(user.toJson)
+        // }
+
+        // return listOfUsers;
+
+        return this.users.map((user) => user.toJson);
+    }
+
+    getUserByEmail(email:string) {
+        const user = this.users.find((user) => user.email.toLowerCase() === email.toLowerCase());
+
+        if(!user) throw "No matching user found";
+
+        return user.toJson;
+    }
+
+    setifVerified(email:string, isVerified:boolean) {
+        const user = this.users.find((user) => user.email.toLowerCase() === email.toLowerCase());
+
+        if(!user) throw "No matching user found";
+
+        if(isVerified !== user.isVerified) throw `isVerfied can't be determined`;
+
+        user.isVerified = Boolean(isVerified);
+
+        return user.toJson;
     }
 }
 

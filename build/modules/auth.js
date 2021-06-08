@@ -24,11 +24,30 @@ var Auth = /** @class */ (function () {
     Auth.prototype.register = function (userId, email, pwd) {
         var userReg = new user_1.default(userId, email, pwd);
         this.users.push(userReg);
-        return {
-            userId: userReg.name,
-            email: userReg.email,
-            password: userReg.pwd
-        };
+        return userReg.toJson;
+    };
+    Auth.prototype.listOfUsers = function () {
+        // const listOfUsers = [];
+        // for (let user of this.users) {
+        //     listOfUsers.push(user.toJson)
+        // }
+        // return listOfUsers;
+        return this.users.map(function (user) { return user.toJson; });
+    };
+    Auth.prototype.getUserByEmail = function (email) {
+        var user = this.users.find(function (user) { return user.email.toLowerCase() === email.toLowerCase(); });
+        if (!user)
+            throw "No matching user found";
+        return user.toJson;
+    };
+    Auth.prototype.setifVerified = function (email, isVerified) {
+        var user = this.users.find(function (user) { return user.email.toLowerCase() === email.toLowerCase(); });
+        if (!user)
+            throw "No matching user found";
+        if (isVerified !== user.isVerified)
+            throw "isVerfied can't be determined";
+        user.isVerified = Boolean(isVerified);
+        return user.toJson;
     };
     return Auth;
 }());

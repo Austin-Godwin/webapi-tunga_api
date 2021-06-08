@@ -35,6 +35,16 @@ export default class User {
         this._lastLogin = date;
     }
 
+    get toJson() {
+        return {
+            userId: this.name,
+            email: this.email,
+            password: "******",
+            isVerified: this.isVerified === true ? "Yes" : "No",
+            lastLogin: this._lastLogin
+        }
+    }
+
     //Question
     /*How do you get users details, do you create an html form to get the user details or what can one do? */
 
